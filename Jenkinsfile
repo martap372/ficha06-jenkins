@@ -50,8 +50,8 @@ pipeline {
         }
 
         stage('Docker Preflight') {
-            withEnv(["PATH+DOCKER=/usr/bin"]) {
-                steps {
+            steps {
+                withEnv(["PATH+DOCKER=/usr/bin"]) {
                     sh '''
                         set -eu
                         command -v docker
