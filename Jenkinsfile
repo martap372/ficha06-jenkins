@@ -50,13 +50,15 @@ pipeline {
         }
 
         stage('Docker Preflight') {
-            steps {
-                sh '''
-                    set -eu
-                    command -v docker
-                    docker info --format '{{.ServerVersion}}'
-                    test -f Dockerfile
-                '''
+            withEnv(["PATH+DOCKER=/usr/bin"]) {
+                steps {
+                    sh '''
+                        set -eu
+                        command -v docker
+                        docker info --format '{{.ServerVersion}}'
+                        test -f Dockerfile
+                    '''
+                }
             }
         }
         
